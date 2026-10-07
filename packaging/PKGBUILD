@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=ooumount-bin
+_pkgname=ooumount
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Detaches mounted filesystems cleanly with lazy unmount and sync safety."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/ooumount"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('ooumount')
+conflicts=('ooumount')
+source_x86_64=("${url}/releases/download/v${pkgver}/ooumount-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/ooumount-linux-x86_64" "${pkgdir}/usr/bin/ooumount"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/ooumount-uninstall"
+}
